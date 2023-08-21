@@ -28,7 +28,7 @@ export default function ProductCard() {
             <div className='product-main-card m-2'>
                 {product ?
                     product.map((item) => {
-                        return <div className='m-2' >
+                        return <div className='m-2' key={item.id} >
                             <Card style={{ width: '20vw', height: '45vh' }}>
                                 <CardMedia
                                     component="img"

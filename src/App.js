@@ -6,21 +6,23 @@ import ProductCard from './components/card';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from './components/Nav';
 
-
 function App() {
-
   const dispatch = useDispatch();
+  const isError = useSelector((state) => state.product.isError);
+  const isLoading = useSelector((state) => state.product.isLoading);
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(fetchProduct())
-  },[dispatch])
+  }, [dispatch])
 
   return (
-   <>
-   <NavBar/>
-   <ProductCard/>
-   </>
-  
+    <>
+      {isError ? 'Having issue with Data' :
+        <>
+          <NavBar />
+          {isLoading ? 'Loading...' : <ProductCard />}
+        </>}
+    </>
   );
 }
 

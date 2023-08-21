@@ -4,8 +4,6 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useSelector } from 'react-redux';
 
@@ -20,7 +18,6 @@ export default function NavBar() {
             Shop Here :)
           </Typography>
           <Button color="inherit"> <ShoppingCartIcon/> {cartValue} </Button>
-         
         </Toolbar>
       </AppBar>
     </Box>
