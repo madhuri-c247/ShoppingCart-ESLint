@@ -28,8 +28,7 @@ export default function ProductCard() {
             <div className='product-main-card m-2'>
                 {product ?
                     product.map((item) => {
-                        return <div className='m-2' key={item.id} >
-                            <Card style={{ width: '20vw', height: '45vh' }}>
+                        return  <Card  className='m-2 card-main' key={item.id} style={{ width: '20vw', height: '45vh' }}>
                                 <CardMedia
                                     component="img"
                                     alt="product"
@@ -37,20 +36,20 @@ export default function ProductCard() {
                                     image={item.image}
                                 />
                                 <CardContent>
-                                    <Typography gutterBottom variant="h5" component="div">
+                                    <Typography gutterBottom variant="h7" component="div">
                                         {item.category}
                                     </Typography>
                                     <Typography variant="body2" color="text.secondary">
                                     $ {item.price}
                                     </Typography>
-                                </CardContent>
-                                <CardActions>
+                                <CardActions className='card-actions'>
                                     <Button className='btn' size="small"onClick={()=>handleRemoveToCart(item.id)} ><RemoveIcon/></Button>
-                                    <Typography  size="small" >Add To Cart {quantity}</Typography>
+                                    <p> {quantity}</p>
                                     <Button className='btn' size="small" onClick={()=>handleAddToCart(item.id)}><AddIcon/></Button>
                                 </CardActions>
+                                </CardContent>
                             </Card>
-                        </div>
+                        
                     })
                     : 'loading...'}
             </div>

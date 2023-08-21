@@ -19,8 +19,8 @@ function App() {
     <>
       {isError ? 'Having issue with Data' :
         <>
-          <NavBar />
-          {isLoading ? 'Loading...' : <ProductCard />}
+          <NavBar/>
+          {isLoading ? 'Loading...' : <ProductCard/>}
         </>}
     </>
   );
