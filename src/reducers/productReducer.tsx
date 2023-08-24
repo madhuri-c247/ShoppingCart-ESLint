@@ -5,7 +5,7 @@ import {
   current,
 } from "@reduxjs/toolkit";
 //model
-import { Actions, ProductData, States } from "../components/model";
+import { Actions, ProductData, States } from "../helper/model";
 //helper
 import fetchData from "../helper/apiHelper";
 //constants

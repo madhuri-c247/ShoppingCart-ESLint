@@ -25,7 +25,8 @@ function Home() {
         <>
           <NavBar />
           {isLoading ? <h1>Loading...</h1>: <ProductCard />}
-        </>}
+        </>
+      }
     </>
   );
 }

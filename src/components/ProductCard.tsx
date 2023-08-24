@@ -12,7 +12,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 // components
 import { AddToCart, RemoveToCart } from "../reducers/productReducer";
 // services
-import { ProductData } from "./model";
+import { ProductData } from "../helper/model";
 import { AppDispatch, RootState } from "../store/store";
 
 export default function ProductCard() {
