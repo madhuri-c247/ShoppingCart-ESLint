@@ -1,15 +1,18 @@
 import * as React from 'react';
+import { TypedUseSelectorHook, useSelector } from 'react-redux';
+//material ui
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { useSelector } from 'react-redux';
+//services
+import { RootState } from '../store/store';
 
 export default function NavBar() {
-
-    const cartValue = useSelector((state)=> state.product.cart)
+  const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+  const cartValue = useAppSelector((state)=> state.product.cart);
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
