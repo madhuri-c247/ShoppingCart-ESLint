@@ -1,74 +1,69 @@
-import axios from "axios";
-import { PayloadAction, createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
-import { ProductData } from "../components/model";
+import {
+  PayloadAction,
+  createAsyncThunk,
+  createSlice,
+  current,
+} from "@reduxjs/toolkit";
+//model
+import { Actions, ProductData, States } from "../components/model";
+//helper
+import fetchData from "../helper/apiHelper";
+//constants
+import { PRODUCT_BASE_URL } from "../helper/constants";
 
-export const fetchProduct = createAsyncThunk('fetchProducts', 
-
-async () => {
-    const product = await axios.get('https://fakestoreapi.com/products')
-        const productData = product.data as ProductData
-        console.log(productData,'productdata')
-        return productData; 
-})
-
-interface States{
-    product: ProductData[];
-    isLoading: boolean;
-    isError: boolean;
-    cart: number;
-    productQuantity: number;
-    productID: number;
-}
-
-interface Actions{
-    id: number,
-    cartValue:number
-}
+export const fetchProduct = createAsyncThunk<ProductData, void>(
+  "fetchProducts",
+  async () => {
+    const product = await fetchData(PRODUCT_BASE_URL);
+    return product;
+  }
+);
 
 const productSlice = createSlice({
-    name: 'product',
-    initialState: {
-        product: [],
-        isLoading: false,
-        isError: false,
-        cart: 0,
-        productQuantity: 0,
-        productID: 0
-    } as States,
+  name: "product",
+  initialState: {
+    product: [],
+    isLoading: false,
+    isError: false,
+    cart: 0,
+    productQuantity: 0,
+    productID: 0,
+  } as States,
 
-    reducers: {
-        AddToCart: (state, action:PayloadAction<Actions>) => {
-            state.cart = action.payload.cartValue + 1;
-            //as I'm getting proxy data while utilizing state directly.
-            //using current(state) could help you get exact data.
-            if(state.product!=null){
-                const requiredData = current(state.product).find((item:ProductData) => {
-                    return item.id === action.payload.id
-                })
-                console.log(requiredData, 'data');
-            }
-        },
-        RemoveToCart: (state, action:PayloadAction<Actions>) => {
-            if (action.payload.cartValue > 0) {
-                state.cart = action.payload.cartValue - 1;
-            }
-        },
+  reducers: {
+    AddToCart: (state, action: PayloadAction<Actions>) => {
+      state.cart = action.payload.cartValue + 1;
+      //as I'm getting proxy data while utilizing state directly.
+      //using current(state) could help you get exact data.
+      if (state.product != null) {
+        current(state.product).find((item: ProductData) => {
+          return item.id === action.payload.id;
+        });
+      }
     },
+    RemoveToCart: (state, action: PayloadAction<Actions>) => {
+      if (action.payload.cartValue > 0) {
+        state.cart = action.payload.cartValue - 1;
+      }
+    },
+  },
 
-    extraReducers: (builder) => {
-        builder.addCase(fetchProduct.pending, (state) => {
-            state.isLoading = true;
-        });
-        builder.addCase(fetchProduct.fulfilled, (state, action:PayloadAction<any>) => {
-            state.isLoading = false;
-            state.isError = false;
-            if(state.product.length===0) state.product.push(...action.payload);                    
-        });
-        builder.addCase(fetchProduct.rejected, (state) => {
-            state.isError = true;
-        })
-    }
-})
+  extraReducers: (builder) => {
+    builder.addCase(fetchProduct.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchProduct.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.isError = false;
+      state.product = action.payload.map((product: ProductData) => ({
+        ...product,
+      }));
+    });
+    builder.addCase(fetchProduct.rejected, (state) => {
+      state.isError = true;
+    });
+  },
+});
 
 export const { AddToCart, RemoveToCart } = productSlice.actions;
 export default productSlice.reducer;

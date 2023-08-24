@@ -3,6 +3,13 @@ module.exports = {
         "browser": true,
         "es2021": true
     },
+
+    "settings": {
+        "react": {
+          "version": "detect"
+        }
+      },
+
     "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
@@ -28,8 +35,14 @@ module.exports = {
     },
     "plugins": [
         "@typescript-eslint",
-        "react"
+        "react",
+        "react-hooks"
     ],
     "rules": {
+        "no-console":"error",
+        "semi": ["error", "always"],
+        "react-hooks/exhaustive-deps": "warn",
+        "@typescript-eslint/no-explicit-any": "error",
+        "react-hooks/rules-of-hooks": "error"
     }
 }

@@ -1,14 +1,13 @@
-
-import React from 'react';
-import './App.css';
-import Home from './components/Home';
+//  /*eslint-disable*/
+import React from "react";
+import "./App.css";
+import Home from "./components/Home";
 
 function App() {
-
   return (
-   <div>
-    <Home/>
-   </div>
+    <div>
+      <Home />
+    </div>
   );
 }
 
