@@ -12,7 +12,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 // components
 import { AddToCart, RemoveToCart } from "../reducers/productReducer";
 // services
-import { ProductData } from "./model";
+import { ProductData } from "../helper/model";
 import { AppDispatch, RootState } from "../store/store";
 
 export default function ProductCard() {
@@ -47,7 +47,6 @@ export default function ProductCard() {
                       <Typography
                         gutterBottom
                         component="div"
-                        data-testId="category"
                       >
                         {item.category}
                       </Typography>
@@ -66,7 +65,6 @@ export default function ProductCard() {
                         <Button
                           className="btn"
                           size="small"
-                          data-testId="addBtn"
                           onClick={() => handleAddToCart(item.id)}
                         >
                           <AddIcon />

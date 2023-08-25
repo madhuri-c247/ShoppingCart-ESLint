@@ -7,6 +7,7 @@ import ProductCard from './ProductCard';
 import NavBar from './Nav';
 //services
 import { AppDispatch, RootState } from '../store/store';
+import Spinner from './Spinner';
 
 function Home() {
   const useAppDispatch: () => AppDispatch = useDispatch;
@@ -24,8 +25,9 @@ function Home() {
       {isError ? <h1>Having issue with Data</h1> :
         <>
           <NavBar />
-          {isLoading ? <h1>Loading...</h1>: <ProductCard />}
-        </>}
+          {isLoading ? <Spinner/> : <ProductCard />}
+        </>
+      }
     </>
   );
 }
